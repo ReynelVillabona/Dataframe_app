@@ -1,25 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import BatchTable from "./components/BatchTable.js";
+import BATCHES from "./data/datos.js"
 
-function App() {
+
+
+
+function table_render()  {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <BatchTable batches={BATCHES} />
     </div>
   );
 }
 
-export default App;
+export default table_render;
