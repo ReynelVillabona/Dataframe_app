@@ -22,6 +22,7 @@ const BatchTable = ({ batches }) => {
           <th>Day Light Integral</th>
           <th>Cutting Height</th>
           <th>Yield</th>
+          <th>Plant Image</th>
         </tr>
         <tr>
           <td>

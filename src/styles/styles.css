@@ -2,11 +2,22 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;    
-    height: 50vh;
+    flex-direction: column;
+    height: 110vh;
 }
 
 .centered-container h1 {
     font-size: 24px;
     margin-bottom: 20px;
 }
+
+.scroll-container {
+    overflow: auto;
+    height: 130vh;
+}
+
+table {
+    border-spacing: 22px;
+    
+}
+
