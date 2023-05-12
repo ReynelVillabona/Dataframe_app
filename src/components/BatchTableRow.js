@@ -1,6 +1,7 @@
 import React from "react";
 
 const BatchTableRow = ({ batch }) => {
+  
   return (
     <tr>
       <td>{batch.substrate_id}</td>
