@@ -1,45 +1,32 @@
 import React, { useState } from "react";
-import BatchTableRow from "./BatchTableRow";
-import BatchSelected from "./Batchselected";
+import BatchTableRow from "./BatchTableRow.js";
+import BatchSelected from "./Batchselected.js";
 
-const BatchTable = ({ batches }) => {
+const BatchTable = () => {
   const [selectedSubstrateId, setSelectedSubstrateId] = useState("");
 
-  const SelectionId = (event) => {
-    setSelectedSubstrateId(event.target.value);
+  const handleSelectionId = (selectedValue) => {
+    setSelectedSubstrateId(selectedValue);
   };
 
-  const filteredBatches = batches.filter((batch) =>
-    selectedSubstrateId !== "" ? batch.substrate_id === parseInt(selectedSubstrateId) : true
-  );
+  const columnNames = ["Substrate ID", "Growth Days", "Day Light Integral", "Cutting Height", "Yield", "Plant Image"];
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Substrate ID</th>
-          <th>Growth Days</th>
-          <th>Day Light Integral</th>
-          <th>Cutting Height</th>
-          <th>Yield</th>
-          <th>Plant Image</th>
-        </tr>
-        <tr>
-          <td>
-            <BatchSelected
-              batches={batches}
-              selectedSubstrateId={selectedSubstrateId}
-              SelectionId={SelectionId}
-            />
-          </td>
-        </tr>
-      </thead>
-      <tbody>
-        {filteredBatches.map((batch) => (
-          <BatchTableRow key={batch.substrate_id} batch={batch} />
-        ))}
-      </tbody>
-    </table>
+    <div>
+      <BatchSelected SelectionId={handleSelectionId} />
+      <table>
+        <thead>
+          <tr>
+            {columnNames.map((columnName, index) => (
+              <th key={index}>{columnName}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {selectedSubstrateId && <BatchTableRow substrateId={parseInt(selectedSubstrateId)} />}
+        </tbody>
+      </table>
+    </div>
   );
 };
 
