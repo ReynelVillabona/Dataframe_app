@@ -16,7 +16,7 @@ const BatchTableRow = ({ substrateId }) => {
     }
   }, [substrateId]);
 
-  console.log("batchData:", batchData);
+  
 
   if (!batchData) {
     return <tr><td colSpan={6}>Loading...</td></tr>; 

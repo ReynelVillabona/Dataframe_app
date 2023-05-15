@@ -1,19 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { printKeys } from "../data/database";
+import React, { useState } from "react";
 
-const BatchSelected = ({ SelectionId }) => {
+const BatchSelected = ({ SelectionId, keyOptions }) => {
   const [selectedSubstrateId, setSelectedSubstrateId] = useState("");
-  const [keyOptions, setKeyOptions] = useState([]);
 
-  useEffect(() => {
-    printKeys()
-      .then((keys) => {
-        setKeyOptions(keys);
-      })
-      .catch((error) => {
-        console.error("Error al obtener las claves:", error);
-      });
-  }, []);
+  
 
   const handleSelection = (event) => {
     const selectedValue = event.target.value;
@@ -21,8 +11,8 @@ const BatchSelected = ({ SelectionId }) => {
     SelectionId(selectedValue);
   };
 
-  console.log("selectedSubstrateId:", selectedSubstrateId);
-  console.log("typeof selectedSubstrateId:", typeof selectedSubstrateId);
+  console.log("keysssss in batchselecteddd:", keyOptions);
+  console.log("keysss   batchselecteddd:", typeof keyOptions);
 
   return (
     <select value={selectedSubstrateId} onChange={handleSelection}>
