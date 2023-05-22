@@ -137,4 +137,33 @@ export function addNewRow(data) {
   });
 }
 
+export function deleteRow(key) {
+  console.log('Key Type delete functionnn:', typeof key);
+  console.log('Key Value delete function:', key);
+
+  return new Promise((resolve, reject) => {
+    openDatabase()
+      .then((db) => {
+        const transaction = db.transaction('plants', 'readwrite');
+        const objectStore = transaction.objectStore('plants');
+
+        const request = objectStore.delete(key);
+
+        request.onsuccess = () => {
+          console.log('Row deleted successfully');
+          resolve();
+        };
+
+        request.onerror = (error) => {
+          console.log('Error deleting row', error);
+          reject(error);
+        };
+      })
+      .catch((error) => {
+        console.log('Error opening database', error);
+        reject(error);
+      });
+  });
+}
+
 
