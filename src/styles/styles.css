@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 110vh;
+    height: 140vh;
 }
 
 .centered-container h1 {
@@ -13,11 +13,11 @@
 
 .scroll-container {
     overflow: auto;
-    height: 130vh;
+    height: 180vh;
 }
 
 table {
-    border-spacing: 22px;
+    border-spacing: 10px;
     
 }
 

@@ -1,30 +1,32 @@
 import BATCHES from "./datos.js";
 
 const indexedDB = window.indexedDB;
-let db;
 
 export function openDatabase() {
+  return new Promise((resolve, reject) => {
+    const conexion = indexedDB.open('PlantData', 1);
 
-  const conexion = indexedDB.open('PlantData', 1);
+    conexion.onsuccess = () => {
+      const db = conexion.result;
+      console.log('Base de datos abierta', db);
+      resolve(db);
+    };
 
-  conexion.onsuccess = () => {
-    db = conexion.result;
-    console.log("Base de datos abierta", db);
-  };
-
-  conexion.onupgradeneeded = (event) => {
+    conexion.onupgradeneeded = (event) => {
       const db = event.target.result;
 
-      const objectStore = db.createObjectStore("plants", { keyPath: "substrate_id" });
+      const objectStore = db.createObjectStore('plants', { keyPath: 'substrate_id' });
 
       BATCHES.forEach((batch) => {
         objectStore.add(batch);
       });
     };
 
-  conexion.onerror = (error) => {
-    console.log("Error al abrir la base de datos", error);
-  };
+    conexion.onerror = (error) => {
+      console.log('Error al abrir la base de datos', error);
+      reject(error);
+    };
+  });
 }
 
 
@@ -107,5 +109,32 @@ export function printKeys() {
   });
 }
 
+
+
+export function addNewRow(data) {
+  return new Promise((resolve, reject) => {
+    openDatabase()
+      .then((db) => {
+        const transaction = db.transaction('plants', 'readwrite');
+        const objectStore = transaction.objectStore('plants');
+
+        const request = objectStore.add(data);
+
+        request.onsuccess = () => {
+          console.log('New row added successfully');
+          resolve();
+        };
+
+        request.onerror = (error) => {
+          console.log('Error adding new row', error);
+          reject(error);
+        };
+      })
+      .catch((error) => {
+        console.log('Error opening database', error);
+        reject(error);
+      });
+  });
+}
 
 
