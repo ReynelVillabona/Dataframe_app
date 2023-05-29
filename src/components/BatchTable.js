@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import BatchTableRow from "./BatchTableRow.js";
 import BatchSelected from "./Batchselected.js";
+import ColumnHeaders from "./ColumnHeaders.js";
 
 const BatchTable = ({ keyOptions }) => {
   const [selectedSubstrateId, setSelectedSubstrateId] = useState("");
@@ -8,16 +9,7 @@ const BatchTable = ({ keyOptions }) => {
   const handleSelectionId = (selectedValue) => {
     setSelectedSubstrateId(selectedValue);
   };
-
   
-
-
-  console.log("selectedSubstrateId tablaaa:", selectedSubstrateId);
-  console.log("typeof selectedSubstrateId tablaaa:", typeof selectedSubstrateId);
-
-
-  console.log("keysssss in tableee:", keyOptions);
-  console.log("keysss   table:", typeof keyOptions);
 
   const columnNames = ["Substrate ID", "Growth Days", "Day Light Integral", "Cutting Height", "Yield", "Plant Image"];
 
@@ -25,13 +17,7 @@ const BatchTable = ({ keyOptions }) => {
     <div>
       <BatchSelected SelectionId={handleSelectionId} keyOptions={keyOptions} />
       <table>
-        <thead>
-          <tr>
-            {columnNames.map((columnName, index) => (
-              <th key={index}>{columnName}</th>
-            ))}
-          </tr>
-        </thead>
+        <ColumnHeaders columnNames={columnNames} />
         <tbody>
             {selectedSubstrateId === ""
             ? keyOptions.map((batch) => (
