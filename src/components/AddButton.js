@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { addNewRow } from '../data/database.js';
+import { addNewRow, updatekey } from '../data/database.js';
 
 const AddNewRowForm = ({data}) => {
   const initialFormData = {
@@ -31,9 +31,27 @@ const AddNewRowForm = ({data}) => {
   setFormData(initialFormData);
 };
 
-  const submitChanges =() =>{
+  const submitChanges = () => {
+    const updatedData = {
+      ...data,
+      growth_days: parseInt(formData.growth_days),
+      day_light_integral: parseFloat(formData.day_light_integral),
+      cutting_height: parseFloat(formData.cutting_height),
+      yield: parseFloat(formData.yield),
+      image: formData.image
+    };
 
-  };
+  updatekey(data.substrate_id, updatedData)
+    .then(() => {
+        console.log('data updated successfully!');
+        window.location.reload(); // Reload the app 
+      })
+      .catch((error) => {
+        console.log('Error adding new row', error);
+        // Handle any errors that occur during insertion
+      });
+};
+
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -130,7 +148,7 @@ const AddNewRowForm = ({data}) => {
       </div>
       <button type="submit">Add New Row</button>
       <button type="button" onClick={handleClearForm}>Clear Form</button>
-      {FormModified && JSON.stringify(formData) !== JSON.stringify(initialFormData) && (
+      {FormModified && formData.substrate_id === data.substrate_id &&  JSON.stringify(formData) !== JSON.stringify(initialFormData) && (
   <button type="button" onClick={submitChanges}>
     Update Form
   </button>

@@ -166,4 +166,32 @@ export function deleteRow(key) {
   });
 }
 
+export function updatekey(key, newData) {
+  return new Promise((resolve, reject) => {
+    openDatabase()
+      .then((db) => {
+        const transaction = db.transaction('plants', 'readwrite');
+        const objectStore = transaction.objectStore('plants');
+
+        const request = objectStore.put(newData);
+
+        request.onsuccess = () => {
+          console.log('Registro actualizado correctamente');
+          resolve();
+        };
+
+        request.onerror = (error) => {
+          console.log('Error al actualizar el registro', error);
+          reject(error);
+        };
+      })
+      .catch((error) => {
+        console.log('Error al abrir la base de datos', error);
+        reject(error);
+      });
+  });
+}
+
+
+
 
