@@ -1,15 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { addNewRow } from '../data/database.js';
 
-const AddNewRowForm = () => {
-  const [formData, setFormData] = useState({
+const AddNewRowForm = ({data}) => {
+  const initialFormData = {
     substrate_id: '',
     growth_days: '',
     day_light_integral: '',
     cutting_height: '',
     yield: '',
     image: '',
-  });
+  };
+
+  const [formData, setFormData] = useState(data || initialFormData);
+
+
+  useEffect(() => {
+    setFormData(data);
+  }, [data]);
+
+  const handleClearForm = () => {
+    setFormData(initialFormData);
+  };
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -105,6 +116,7 @@ const AddNewRowForm = () => {
         />
       </div>
       <button type="submit">Add New Row</button>
+      <button type="button" onClick={handleClearForm}>Clear Form</button>
     </form>
   );
 };
