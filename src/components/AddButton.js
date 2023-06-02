@@ -12,6 +12,13 @@ const AddNewRowForm = ({data}) => {
   };
 
   const [formData, setFormData] = useState(data || initialFormData);
+  const [FormModified, setFormModified] = useState(false);
+
+  useEffect(() => {
+  const isModified = Object.keys(formData).some((key) => formData[key] !== data[key]);
+  setFormModified(isModified);
+}, [formData, data]);
+
 
 
   useEffect(() => {
@@ -19,7 +26,13 @@ const AddNewRowForm = ({data}) => {
   }, [data]);
 
   const handleClearForm = () => {
-    setFormData(initialFormData);
+      setFormModified(false);
+
+  setFormData(initialFormData);
+};
+
+  const submitChanges =() =>{
+
   };
 
   const handleInputChange = (event) => {
@@ -117,6 +130,13 @@ const AddNewRowForm = ({data}) => {
       </div>
       <button type="submit">Add New Row</button>
       <button type="button" onClick={handleClearForm}>Clear Form</button>
+      {FormModified && JSON.stringify(formData) !== JSON.stringify(initialFormData) && (
+  <button type="button" onClick={submitChanges}>
+    Update Form
+  </button>
+)}
+
+
     </form>
   );
 };
