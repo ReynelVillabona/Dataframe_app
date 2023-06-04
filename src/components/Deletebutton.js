@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { deleteRow } from '../data/database.js';
+import "../styles/styles.css";
+
 
 const Deleterow = ({ keyOptions }) => {
     const [selectedKey, setSelectedKey] = useState('');
@@ -30,7 +32,7 @@ const Deleterow = ({ keyOptions }) => {
         }
     };
     return (
-        <div>
+        <div className="delete-row">
                 <select value={selectedKey} onChange={handleKeySelection}>
                     <option value="">Select a key</option>
                     {keyOptions.map((key) => (

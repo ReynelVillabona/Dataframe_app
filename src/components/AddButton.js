@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { addNewRow, updatekey } from '../data/database.js';
 
+
 const AddNewRowForm = ({data}) => {
   const initialFormData = {
     substrate_id: '',
@@ -90,7 +91,8 @@ const AddNewRowForm = ({data}) => {
   };
 
   return (
-    <form onSubmit={handleFormSubmit}>
+    <form 
+    onSubmit={handleFormSubmit}>
       <div>
         <label htmlFor="substrate_id">Substrate ID:</label>
         <input

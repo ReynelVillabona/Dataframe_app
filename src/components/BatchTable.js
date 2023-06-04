@@ -3,6 +3,8 @@ import BatchTableRow from "./BatchTableRow.js";
 import BatchSelected from "./Batchselected.js";
 import ColumnHeaders from "./ColumnHeaders.js";
 import AddNewRowForm from "./AddButton.js";
+import "../styles/styles.css";
+
 
 const BatchTable = ({ keyOptions }) => {
   const [selectedSubstrateId, setSelectedSubstrateId] = useState("");
@@ -23,10 +25,15 @@ const BatchTable = ({ keyOptions }) => {
 
   return (
     <div>
-      <AddNewRowForm data={data || {}} />
+      <div className="formulario"> 
+        <AddNewRowForm  data={data || {}} />
+      </div>
+      
+      <div className="selector">
+        <BatchSelected  SelectionId={handleSelectionId} keyOptions={keyOptions} />
+      </div>
 
-      <BatchSelected SelectionId={handleSelectionId} keyOptions={keyOptions} />
-      <table>
+      <table className="tabla">
         <ColumnHeaders columnNames={columnNames} />
         <tbody>
             {selectedSubstrateId === ""

@@ -17,6 +17,7 @@
 }
 
 table {
+    position: relative;
     border-spacing: 10px;
     
 }
@@ -30,5 +31,26 @@ table {
     border-radius: 4px;
     cursor: pointer;
 }
+
+.delete-row {
+    position: relative;
+    top:  50px;
+    left: 260px;
+    
+}
+
+.formulario {
+    position: relative;
+    top: 0px;
+    left: 190px;
+}
+
+.selector {
+    position: relative;
+    bottom: 100px;
+
+}
+
+
 
 
