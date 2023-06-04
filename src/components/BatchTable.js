@@ -3,12 +3,14 @@ import BatchTableRow from "./BatchTableRow.js";
 import BatchSelected from "./Batchselected.js";
 import ColumnHeaders from "./ColumnHeaders.js";
 import AddNewRowForm from "./AddButton.js";
+import Deleterow from "./Deletebutton.js";
+
 import "../styles/styles.css";
 
 
 const BatchTable = ({ keyOptions }) => {
   const [selectedSubstrateId, setSelectedSubstrateId] = useState("");
-    const [data, setData] = useState(null);
+  const [data, setData] = useState(null);
 
 
   const handleSelectionId = (selectedValue) => {
@@ -16,7 +18,6 @@ const BatchTable = ({ keyOptions }) => {
   };
 
   const handleDataUpdate = (data) => {
-  console.log('Data from handleButtonClick in BatchTableRow:', data);
   setData(data);
 };
   
@@ -28,6 +29,9 @@ const BatchTable = ({ keyOptions }) => {
       <div className="formulario"> 
         <AddNewRowForm  data={data || {}} />
       </div>
+
+      <Deleterow  keyOptions={keyOptions} />
+
       
       <div className="selector">
         <BatchSelected  SelectionId={handleSelectionId} keyOptions={keyOptions} />
@@ -35,10 +39,10 @@ const BatchTable = ({ keyOptions }) => {
 
       <table className="tabla">
         <ColumnHeaders columnNames={columnNames} />
-        <tbody>
+        <tbody >
             {selectedSubstrateId === ""
             ? keyOptions.map((batch) => (
-                <BatchTableRow substrateId={parseInt(batch)} key={batch} handleDataUpdate={handleDataUpdate} />
+                <BatchTableRow  substrateId={parseInt(batch)} key={batch} handleDataUpdate={handleDataUpdate} />
               ))
             : <BatchTableRow substrateId={parseInt(selectedSubstrateId)} handleDataUpdate={handleDataUpdate}/>}
         </tbody>

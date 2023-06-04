@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import BatchTable from "./components/BatchTable.js";
-import Deleterow from "./components/Deletebutton.js";
 
 import "./styles/styles.css";
 import { openDatabase, printKeys } from "./data/database.js";
@@ -39,7 +38,6 @@ function Table_render() {
     <div className="scroll-container">
       <div className="centered-container">
         <h1>Data Visualization</h1>
-        <Deleterow  keyOptions={keyOptions} />
         <BatchTable keyOptions={keyOptions} />
       </div>
     </div>

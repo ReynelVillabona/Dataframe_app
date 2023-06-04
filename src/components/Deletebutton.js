@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { deleteRow } from '../data/database.js';
+import DeleteButton from "../functions_events/DeleteFunction.js"
 import "../styles/styles.css";
 
 
@@ -11,26 +11,8 @@ const Deleterow = ({ keyOptions }) => {
             setSelectedKey(selectedKey);
     };
 
-    console.log('Selected Key delete buttonnn:', selectedKey);
-    console.log('Selected Key delete buttonnn:', typeof selectedKey);
-
-    const handleDeleteButtonClick = () => {
-        if (selectedKey) {
-            const keyToDelete = parseInt(selectedKey); 
-
-            deleteRow(keyToDelete)
-                .then(() => {
-                    console.log('Row deleted successfully');
-                    setSelectedKey(''); // Reset the selected key
-                    window.location.reload(); 
-                })
-                .catch((error) => {
-                    console.log('Error deleting row', error);
-                });
-        } else {
-            console.log('Please select a key');
-        }
-    };
+    
+    
     return (
         <div className="delete-row">
                 <select value={selectedKey} onChange={handleKeySelection}>
@@ -41,7 +23,7 @@ const Deleterow = ({ keyOptions }) => {
                         </option>
                     ))}
                 </select>
-            <button onClick={handleDeleteButtonClick}>Delete</button>
+             <DeleteButton selectedKey={selectedKey} setSelectedKey={setSelectedKey} />
         </div>
     );
 }

@@ -34,23 +34,26 @@ table {
 
 .delete-row {
     position: relative;
-    top:  50px;
-    left: 260px;
+    bottom:  100px;
+    left: 550px;
     
 }
 
 .formulario {
     position: relative;
     top: 0px;
-    left: 190px;
+    left: 180px;
 }
 
 .selector {
     position: relative;
-    bottom: 100px;
+    bottom: 105px;
 
 }
 
+.centered {
+    text-align: center;
+}
 
 
 
