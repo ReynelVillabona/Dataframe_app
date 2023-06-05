@@ -4,8 +4,10 @@ export const handleButtonClick = (substrateId, handleDataUpdate) => {
   console.log(substrateId);
   getDataBySubstrateId(substrateId)
     .then((data) => {
+
+      //check if "handleDataUpdate" is a valid function
       if (handleDataUpdate) {
-        handleDataUpdate(data[0]); // función en BatchTable
+        handleDataUpdate(data[0]); // Batch table function
       }
     })
     .catch((error) => {

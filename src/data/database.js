@@ -1,27 +1,38 @@
 import BATCHES from "./datos.js";
 
-const indexedDB = window.indexedDB;
+
+//creates a reference to the interface of indexedDB 
+const indexedDB = window.indexedDB;  
 
 export function openDatabase() {
   return new Promise((resolve, reject) => {
+
+    // with the method open a db it is open giving its name and number version
     const conexion = indexedDB.open('PlantData', 1);
 
+    // if the conexion it is succesfully then it resolves the promise 
+    // with a reference to the db opened
     conexion.onsuccess = () => {
       const db = conexion.result;
       console.log('Base de datos abierta', db);
       resolve(db);
     };
 
+    //this is trigger if the db does not exist or if the version it is different
+    // 
     conexion.onupgradeneeded = (event) => {
       const db = event.target.result;
 
+      // an object store it is created , with name and unique identifier for each object
       const objectStore = db.createObjectStore('plants', { keyPath: 'substrate_id' });
-
+      
+      // a loop is made over the batches file
       BATCHES.forEach((batch) => {
         objectStore.add(batch);
       });
     };
 
+    // handling error for the conexion to the db
     conexion.onerror = (error) => {
       console.log('Error al abrir la base de datos', error);
       reject(error);
@@ -86,10 +97,17 @@ export function printKeys() {
 
     conexion.onsuccess = (event) => {
       const db = event.target.result;
+
+      // transaction of only lecture to the db
       const transaction = db.transaction("plants", "readonly");
+
+      //get a reference to the object, to do specific operation within it
       const objectStore = transaction.objectStore("plants");
+
+      // use of the pre-built method
       const request = objectStore.getAllKeys();
 
+      // checked if the request was succesfully run
       request.onsuccess = () => {
         const keys = request.result;
         console.log("Keys:", keys);

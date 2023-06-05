@@ -12,10 +12,15 @@ const AddNewRowForm = ({data}) => {
     yield: '',
     image: '',
   };
+   
 
   const [formData, setFormData] = useState(initialFormData);
   const [FormModified, setFormModified] = useState(false);
 
+  // conditions to show the update button
+  // no equal substrate id
+  //no substrate id field empty
+  //no all the fields same as recieved in data
   useEffect(() => {
   const isSubstrateIdEqual = formData.substrate_id === data.substrate_id;
   const isSubstrateIdEmpty = !formData.substrate_id;
@@ -23,6 +28,7 @@ const AddNewRowForm = ({data}) => {
 
   setFormModified( isSubstrateIdEqual && !isAllFieldsEqual && !isSubstrateIdEmpty);
 }, [formData, data]);
+
 
 
   useEffect(() => {
@@ -36,9 +42,12 @@ const AddNewRowForm = ({data}) => {
 };  
 
   return (
+     
+    
+
     <form>
       <div>
-        <label htmlFor="substrate_id">Substrate ID:</label>
+        <label htmlFor="substrate_id">Substrate ID:</label>       
         <input
           type="number"
           id="substrate_id"
@@ -48,7 +57,7 @@ const AddNewRowForm = ({data}) => {
 
         />
       </div>
-      <div>
+      <div>     
         <label htmlFor="growth_days">Growth Days:</label>
         <input
           type="number"
@@ -56,7 +65,6 @@ const AddNewRowForm = ({data}) => {
           name="growth_days"
           value={formData.growth_days}
           onChange={(event) => handleInputChange(event, formData, setFormData)}
-
         />
       </div>
       <div>
@@ -67,7 +75,6 @@ const AddNewRowForm = ({data}) => {
           name="day_light_integral"
           value={formData.day_light_integral}
           onChange={(event) => handleInputChange(event, formData, setFormData)}
-
         />
       </div>
       <div>
@@ -78,7 +85,6 @@ const AddNewRowForm = ({data}) => {
           name="cutting_height"
           value={formData.cutting_height}
           onChange={(event) => handleInputChange(event, formData, setFormData)}
-
         />
       </div>
       <div>
@@ -89,7 +95,6 @@ const AddNewRowForm = ({data}) => {
           name="yield"
           value={formData.yield}
           onChange={(event) => handleInputChange(event, formData, setFormData)}
-
         />
       </div>
       <div>
@@ -100,7 +105,6 @@ const AddNewRowForm = ({data}) => {
           name="image"
           value={formData.image}
           onChange={(event) => handleInputChange(event, formData, setFormData)}
-
         />
       </div>
       <AddButton formData={formData} />
@@ -122,6 +126,7 @@ const AddNewRowForm = ({data}) => {
 
 
     </form>
+    
   );
 };
 

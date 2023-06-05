@@ -18,7 +18,7 @@ function Table_render() {
         setLoading(false);
       })
       .catch((error) => {
-        console.error("Error al obtener las claves:", error);
+        console.error("Error obtaining the keys", error);
         setLoading(false);
       });
   }, []);
