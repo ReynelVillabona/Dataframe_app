@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import SubmitChangesButton from '../functions_events/UpdateFunction.js';
 import AddButton from '../functions_events/SubmitFunction.js';  
-import { handleInputChange } from '../functions_events/CurrentChangesFunction.js';
+import FormField from './MasterLabel.js';
 
 const AddNewRowForm = ({data}) => {
   const initialFormData = {
@@ -35,78 +35,23 @@ const AddNewRowForm = ({data}) => {
     setFormData(data);
   }, [data]);
 
+  
 
   const handleClearForm = () => {
       setFormModified(false);
       setFormData(initialFormData);
 };  
 
-  return (
-     
+  return (  
     
 
     <form>
-      <div>
-        <label htmlFor="substrate_id">Substrate ID:</label>       
-        <input
-          type="number"
-          id="substrate_id"
-          name="substrate_id"
-          value={formData.substrate_id}
-          onChange={(event) => handleInputChange(event, formData, setFormData)}
-
-        />
-      </div>
-      <div>     
-        <label htmlFor="growth_days">Growth Days:</label>
-        <input
-          type="number"
-          id="growth_days"
-          name="growth_days"
-          value={formData.growth_days}
-          onChange={(event) => handleInputChange(event, formData, setFormData)}
-        />
-      </div>
-      <div>
-        <label htmlFor="day_light_integral">Day Light Integral:</label>
-        <input
-          type="number"
-          id="day_light_integral"
-          name="day_light_integral"
-          value={formData.day_light_integral}
-          onChange={(event) => handleInputChange(event, formData, setFormData)}
-        />
-      </div>
-      <div>
-        <label htmlFor="cutting_height">Cutting Height:</label>
-        <input
-          type="number"
-          id="cutting_height"
-          name="cutting_height"
-          value={formData.cutting_height}
-          onChange={(event) => handleInputChange(event, formData, setFormData)}
-        />
-      </div>
-      <div>
-        <label htmlFor="yield">Yield:</label>
-        <input
-          type="number"
-          id="yield"
-          name="yield"
-          value={formData.yield}
-          onChange={(event) => handleInputChange(event, formData, setFormData)}
-        />
-      </div>
-      <div>
-        <label htmlFor="image">Plant Image URL:</label>
-        <input
-          type="text"
-          id="image"
-          name="image"
-          value={formData.image}
-          onChange={(event) => handleInputChange(event, formData, setFormData)}
-        />
-      </div>
+      <FormField htmlFor="substrate_id" label="Substrate ID:" type="number" value={formData.substrate_id}  formData={formData} setFormData={setFormData} ></FormField>
+      <FormField htmlFor="growth_days" label="Growth Days:" type="number" value={formData.growth_days}  formData={formData} setFormData={setFormData} ></FormField>
+      <FormField htmlFor="day_light_integral" label="Day Light Integral:" type="number" value={formData.day_light_integral}  formData={formData} setFormData={setFormData} ></FormField>
+      <FormField htmlFor="cutting_height" label="Cutting Height:" type="number" value={formData.cutting_height}  formData={formData} setFormData={setFormData} ></FormField>
+      <FormField htmlFor="image" label="Plant Image URL:" type="text" value={formData.image}  formData={formData} setFormData={setFormData} ></FormField>    
+   
       <AddButton formData={formData} />
       <button type="button" onClick={handleClearForm}>Clear Form</button>
       {FormModified && (
@@ -120,10 +65,6 @@ const AddNewRowForm = ({data}) => {
     </div>
   ))}
 </pre> */}
-
-
-
-
 
     </form>
     
